@@ -28,8 +28,22 @@ type ApplicationSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Application. Edit application_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Source ApplicationSource `json:"source"`
+
+	Destination ApplicationDestination `json:"destination"`
+}
+
+type ApplicationSource struct {
+	// RepoUrl is the URL of the repository containing the application manifest
+	RepoUrl string `json:"repoUrl"`
+
+	// Path is the directory Path where the application manifest exists
+	Path string `json:"path"`
+}
+
+type ApplicationDestination struct {
+	// NameSpace is the namespace where the application will be deployed
+	Namespace string `json:"namespace"`
 }
 
 // ApplicationStatus defines the observed state of Application
