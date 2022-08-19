@@ -1,0 +1,72 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.9.0
+  creationTimestamp: null
+  name: applications.gitopscd.amaany3.io
+spec:
+  group: gitopscd.amaany3.io
+  names:
+    kind: Application
+    listKind: ApplicationList
+    plural: applications
+    singular: application
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Application is the Schema for the applications API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ApplicationSpec defines the desired state of Application
+            properties:
+              destination:
+                properties:
+                  namespace:
+                    description: NameSpace is the namespace where the application
+                      will be deployed
+                    type: string
+                required:
+                - namespace
+                type: object
+              source:
+                properties:
+                  path:
+                    description: Path is the directory Path where the application
+                      manifest exists
+                    type: string
+                  repoUrl:
+                    description: RepoUrl is the URL of the repository containing the
+                      application manifest
+                    type: string
+                required:
+                - path
+                - repoUrl
+                type: object
+            required:
+            - destination
+            - source
+            type: object
+          status:
+            description: ApplicationStatus defines the observed state of Application
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
