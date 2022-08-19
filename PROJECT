@@ -6,4 +6,14 @@ plugins:
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: gitops-cd
 repo: github.com/amaany3/gitops-cd
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: amaany3.io
+  group: gitopscd
+  kind: Application
+  path: github.com/amaany3/gitops-cd/api/v1alpha1
+  version: v1alpha1
 version: "3"
